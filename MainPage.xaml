@@ -1,59 +1,49 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PodB_MAUI.MainPage">
+             x:Class="PodB_MAUI.MainPage"
+             BackgroundColor="#121212">
 
-    <Grid ColumnDefinitions="Auto, *">
+    <Grid ColumnDefinitions="300, *">
+
+        <!-- LEFT SIDEBAR -->
         <Grid Grid.Column="0" 
-          RowDefinitions="Auto, *, Auto" 
-          BackgroundColor="#1E1E1E" 
-          Padding="15"
-          WidthRequest="300"
-          MaximumWidthRequest="300"
-        >
+              RowDefinitions="*, Auto, Auto" 
+              BackgroundColor="#1E1E1E" 
+              Padding="20">
 
-            <CollectionView Grid.Row="1" 
-                ItemsSource="{Binding ActivePeers}"
-                SelectionMode="None"
-            >
+            <CollectionView Grid.Row="0" 
+                            ItemsSource="{Binding ActivePeers}"
+                            SelectedItem="{Binding SelectedPeer, Mode=TwoWay}"
+                            SelectionMode="Single">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Border
-                            StrokeShape="RoundRectangle 8"
-                            BackgroundColor="#2D2D2D"
-                            StrokeThickness="0"
-                            Margin="0,0,0,10"
-                            Padding="12,10"
-                        >
-                            <VerticalStackLayout Spacing="2">
-                                <Label
-                                    Text="{Binding Name}" 
-                                    FontSize="16" 
-                                    FontAttributes="Bold" 
-                                    TextColor="White"
-                                />
-
-                                <Label
-                                    Text="{Binding IpAddress}" 
-                                    FontSize="12" 
-                                    TextColor="Gray"
-                                />
+                        <Border StrokeShape="RoundRectangle 8"
+                                BackgroundColor="#2D2D2D"
+                                StrokeThickness="0"
+                                Margin="0,0,0,12"
+                                Padding="14,12">
+                            <VerticalStackLayout Spacing="4">
+                                <Label Text="{Binding Name}" 
+                                       FontSize="16" 
+                                       FontAttributes="Bold" 
+                                       TextColor="White"/>
+                                <Label Text="{Binding IpAddress}" 
+                                       FontSize="12" 
+                                       TextColor="Gray"/>
                             </VerticalStackLayout>
                         </Border>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <!-- Divider -->
-            <BoxView
-                Grid.Row="2"
-                HeightRequest="1" 
-                BackgroundColor="#2D2D2D" 
-                VerticalOptions="Start"
-                Margin="0,0,0,15" 
-            />
+            <BoxView Grid.Row="1"
+                     HeightRequest="1" 
+                     BackgroundColor="#2D2D2D" 
+                     VerticalOptions="Start"
+                     Margin="0,15,0,15"/>
 
-            <StackLayout Grid.Row="2" Spacing="5" Margin="0,15,0,0">
+            <StackLayout Grid.Row="2" Spacing="5">
                 <Entry Text="{Binding Username, Mode=TwoWay}"
                        FontSize="18" 
                        FontAttributes="Bold" 
@@ -61,8 +51,110 @@
                        BackgroundColor="Transparent"
                        HorizontalTextAlignment="Start"/>
             </StackLayout>
+        </Grid>
 
+        <!-- RIGHT AREA -->
+        <Grid Grid.Column="1" 
+              RowDefinitions="*, Auto" 
+              BackgroundColor="#121212">
+
+            <CollectionView Grid.Row="0" 
+                            ItemsSource="{Binding GlobalChatFeed}"
+                            SelectionMode="None"
+                            VerticalOptions="FillAndExpand"
+                            InputTransparent="False">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout Margin="20,8" Spacing="4">
+
+                            <HorizontalStackLayout Spacing="8">
+                                <Label Text="{Binding SenderName}" 
+                                       FontAttributes="Bold" 
+                                       FontSize="12">
+                                    <Label.Style>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="#A0A0A0"/>
+                                            <Style.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding isOutgoing}" Value="True">
+                                                    <Setter Property="TextColor" Value="#4A90E2"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Label.Style>
+                                </Label>
+                                <Label Text="{Binding Timestamp, StringFormat='{0:HH:mm}'}" 
+                                       FontSize="10" 
+                                       TextColor="Gray" 
+                                       VerticalTextAlignment="Center"/>
+                            </HorizontalStackLayout>
+
+                            <Border StrokeShape="RoundRectangle 8"
+                                    StrokeThickness="0"
+                                    Padding="14,10"
+                                    HorizontalOptions="Start">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="BackgroundColor" Value="#2A2A2A"/>
+                                        <Style.Triggers>
+                                            <DataTrigger TargetType="Border" Binding="{Binding isOutgoing}" Value="True">
+                                                <Setter Property="BackgroundColor" Value="#1E3F66"/>
+                                                <Setter Property="HorizontalOptions" Value="End"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Label Text="{Binding Text}"
+                                       TextColor="White" 
+                                       FontSize="14"/>
+                            </Border>
+
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Bottom Control Entry Panel -->
+            <Grid Grid.Row="1" 
+                  ColumnDefinitions="*, Auto" 
+                  ColumnSpacing="12" 
+                  Padding="20,15" 
+                  BackgroundColor="#1E1E1E"
+                  VerticalOptions="End">
+
+                <Border Grid.Column="0"
+                        StrokeShape="RoundRectangle 8"
+                        StrokeThickness="0"
+                        BackgroundColor="#2D2D2D"
+                        Padding="12,0"
+                        HeightRequest="42">
+
+                    <Entry Text="{Binding CurrentMessageText}"
+                           IsEnabled="{Binding IsPeerSelected}"
+                           TextColor="White"
+                           PlaceholderColor="Gray"
+                           BackgroundColor="Transparent">
+                        <Entry.Style>
+                            <Style TargetType="Entry">
+                                <Setter Property="Placeholder" Value="Select a destination..." />
+                                <Style.Triggers>
+                                    <DataTrigger TargetType="Entry" Binding="{Binding IsPeerSelected}" Value="True">
+                                        <Setter Property="Placeholder" Value="Type a message..." />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Entry.Style>
+                    </Entry>
+                </Border>
+
+                <Button Grid.Column="1"
+                        Text="Send"
+                        Command="{Binding SendCommand}"
+                        IsEnabled="{Binding IsPeerSelected}"
+                        BackgroundColor="#1E3F66"
+                        TextColor="White"
+                        HeightRequest="42"
+                        WidthRequest="90"/>
+            </Grid>
         </Grid>
     </Grid>
-
 </ContentPage>

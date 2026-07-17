@@ -17,11 +17,18 @@ namespace PodB_MAUI.Network
         private const int SleepDurationPerBroadcast = 5000; //5s (in ms)
 
         private UdpClient? udpListener;
+        private TcpListener? tcpListener;
+
         private CancellationTokenSource? cts;
         private bool bIsRunning;
 
         private readonly Dictionary<string, Peer> _peers = new();
         private readonly object _peerLock = new();
+
+        private static readonly JsonSerializerOptions JsonOptions = new()
+        {
+            PropertyNameCaseInsensitive = true
+        };
 
 
         //Returns the list of Peers on the same network
@@ -35,6 +42,7 @@ namespace PodB_MAUI.Network
 
         //Sends event once peer is updated
         public event Action<Peer[]>? OnPeersUpdated;
+        public event Action<Message>? OnMessageReceived;
 
         public void Start()
         {
@@ -44,6 +52,7 @@ namespace PodB_MAUI.Network
 
             Task.Run(() => StartListeningAsync(cts.Token));
             Task.Run(() => StartBroadcastingAsync(cts.Token));
+            Task.Run(() => StartTcpListenerAsync(cts.Token));
         }
 
         public void Stop()
@@ -151,6 +160,103 @@ namespace PodB_MAUI.Network
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Listener Error: {ex.Message}");
+            }
+        }
+
+        public async Task<bool> SendMessageAsync(string targetIp, string text)
+        {
+            try
+            {
+                using var client = new TcpClient();
+                var connectTask = client.ConnectAsync(targetIp, MessagePort);
+                var delayTask = Task.Delay(3000);
+
+                var completedTask = await Task.WhenAny(connectTask, delayTask);
+                if (completedTask == delayTask)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[TCP Send] Connection timed out to {targetIp}");
+                    return false;
+                }
+
+                var packet = new MessagePacket
+                {
+                    SenderName = MauiProgram.GetSelf().Name,
+                    MessageText = text,
+                    Timestamp = DateTime.Now,
+                    AppID = AppInstanceId
+                };
+
+                string json = JsonSerializer.Serialize(packet);
+                byte[] bytes = Encoding.UTF8.GetBytes(json);
+
+                using var stream = client.GetStream();
+                await stream.WriteAsync(bytes, 0, bytes.Length);
+                await stream.FlushAsync();
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[TCP Send Error] {ex.Message}");
+                return false;
+            }
+        }
+
+        private async Task StartTcpListenerAsync(CancellationToken token)
+        {
+            try
+            {
+                tcpListener = new TcpListener(IPAddress.Any, MessagePort);
+                tcpListener.Start();
+
+                while (!token.IsCancellationRequested)
+                {
+                    var client = await tcpListener.AcceptTcpClientAsync(token);
+                    _ = Task.Run(() => ProcessIncomingConnectionAsync(client), token);
+                }
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"[TCP Server Error] {ex.Message}");
+            }
+        }
+
+        private async Task ProcessIncomingConnectionAsync(TcpClient client)
+        {
+            using (client)
+            using (var stream = client.GetStream())
+            using (var ms = new MemoryStream())
+            {
+                try
+                {
+                    byte[] buffer = new byte[2048];
+                    int bytesRead;
+
+                    while ((bytesRead = await stream.ReadAsync(buffer, 0, buffer.Length)) > 0)
+                    {
+                        ms.Write(buffer, 0, bytesRead);
+                    }
+
+                    string json = Encoding.UTF8.GetString(ms.ToArray());
+                    var packet = JsonSerializer.Deserialize<MessagePacket>(json);
+
+                    if (packet != null && packet.AppID != AppInstanceId)
+                    {
+                        var chatMsg = new Message
+                        {
+                            SenderName = packet.SenderName,
+                            Text = packet.MessageText,
+                            Timestamp = packet.Timestamp,
+                            isOutgoing = false
+                        };
+
+                        OnMessageReceived?.Invoke(chatMsg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[Process Inbound Msg Error] {ex.Message}");
+                }
             }
         }
 
