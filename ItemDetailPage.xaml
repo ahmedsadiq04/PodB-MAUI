@@ -1,0 +1,22 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PodB_MAUI.ItemDetailPage"
+             Title="Item Details"
+             BackgroundColor="#F5F5F5">
+
+    <VerticalStackLayout Padding="25" Spacing="20">
+
+        <Image x:Name="CategoryImage" HeightRequest="120" Aspect="AspectFit" />
+
+        <Label x:Name="NameLabel" FontSize="28" FontAttributes="Bold" />
+
+        <Border StrokeShape="RoundRectangle 12" Stroke="#DDDDDD" BackgroundColor="White" Padding="20">
+            <VerticalStackLayout Spacing="12">
+                <Label x:Name="CategoryLabel" FontSize="16" />
+                <Label x:Name="PriceLabel" FontSize="16" TextColor="#2E7D32" FontAttributes="Bold" />
+            </VerticalStackLayout>
+        </Border>
+
+    </VerticalStackLayout>
+
+</ContentPage>

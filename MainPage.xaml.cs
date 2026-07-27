@@ -20,5 +20,14 @@
 
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
+
+        private async void OnTestDetailClicked(object sender, EventArgs e)
+        {
+            var testItem = new PodB_MAUI.Model.GroceryItem("Test Apple", PodB_MAUI.Model.GroceryCategory.PRODUCE, 1.29);
+            await Shell.Current.GoToAsync(nameof(ItemDetailPage), new Dictionary<string, object>
+            {
+                { "SelectedItem", testItem }
+            });
+        }
     }
 }
