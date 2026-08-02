@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:PodB_MAUI.Resources"
+             x:Class="PodB_MAUI.AddItemScreen"
+             Title="{x:Static resources:Strings.add_item_page_title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="Gray" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="HorizontalTextAlignment" Value="End" />
+            </Style>
+            
+
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout
+        Margin="10">
+        <Grid
+            ColumnDefinitions="Auto,*"
+            RowDefinitions="Auto, Auto, Auto, Auto"
+            ColumnSpacing="10"
+            RowSpacing="20">
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="0"
+                Text="{x:Static resources:Strings.lbl_product_name}"/>
+
+            <Entry
+                Grid.Column="1"
+                Grid.Row="0"
+                x:Name="ProductNameEntry" 
+                Placeholder="{x:Static resources:Strings.ph_product_name}"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="1"
+                Text="{x:Static resources:Strings.lbl_product_category}" />
+            <Picker
+                Grid.Column="1"
+                Grid.Row="1"
+                x:Name="ProductCategoryPicker" 
+                
+                ItemsSource="{Binding Categories}"
+                SelectedItem="{Binding SelectedCategory}"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="2"
+                Text="{x:Static resources:Strings.lbl_product_description}" />
+
+            <Editor
+                Grid.Column="1"
+                Grid.Row="2"
+                x:Name="ProductDescriptionEditor" 
+                Placeholder="{x:Static resources:Strings.ph_product_description}"
+                AutoSize="TextChanges"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="3"
+                Text="{x:Static resources:Strings.lbl_product_photo_url}"  />
+
+            <Entry
+                Grid.Column="1"
+                Grid.Row="3"
+                x:Name="PhotoUrlEntry" 
+                Placeholder="{x:Static resources:Strings.lbl_product_photo_url}"
+                HorizontalOptions="Fill"/>
+        </Grid>
+    </VerticalStackLayout>
+</ContentPage>

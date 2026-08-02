@@ -63,6 +63,15 @@ namespace PodB_MAUI.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Add Item.
         /// </summary>
+        internal static string add_item_page_title {
+            get {
+                return ResourceManager.GetString("add_item_page_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Item.
+        /// </summary>
         internal static string Add_Item_Title {
             get {
                 return ResourceManager.GetString("Add_Item_Title", resourceCulture);
@@ -79,6 +88,51 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Category:.
+        /// </summary>
+        internal static string lbl_product_category {
+            get {
+                return ResourceManager.GetString("lbl_product_category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description:.
+        /// </summary>
+        internal static string lbl_product_description {
+            get {
+                return ResourceManager.GetString("lbl_product_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Name:.
+        /// </summary>
+        internal static string lbl_product_name {
+            get {
+                return ResourceManager.GetString("lbl_product_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo URL:.
+        /// </summary>
+        internal static string lbl_product_photo_url {
+            get {
+                return ResourceManager.GetString("lbl_product_photo_url", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo Link:.
+        /// </summary>
+        internal static string lbl_product_picture {
+            get {
+                return ResourceManager.GetString("lbl_product_picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
         internal static string ph_product_category {
@@ -88,11 +142,29 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string ph_product_description {
+            get {
+                return ResourceManager.GetString("ph_product_description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product name.
         /// </summary>
         internal static string ph_product_name {
             get {
                 return ResourceManager.GetString("ph_product_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo URL.
+        /// </summary>
+        internal static string ph_product_photo_url {
+            get {
+                return ResourceManager.GetString("ph_product_photo_url", resourceCulture);
             }
         }
         
