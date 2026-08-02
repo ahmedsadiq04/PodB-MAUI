@@ -1,8 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PodB_MAUI.Model
+﻿namespace PodB_MAUI.Model
 {
-    public record GroceryItem(string name, GroceryCategory category, double price);
+    public record GroceryItem(
+        string name,
+        GroceryCategory category,
+        double price,
+        string description = "No description available",
+        string photoUrl = "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
+        QuantityType quantityType = QuantityType.UNIT
+    );
 }
