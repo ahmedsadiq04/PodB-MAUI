@@ -10,11 +10,11 @@ namespace PodB_MAUI
         {
             set
             {
-                NameLabel.Text = value.name;
-                CategoryLabel.Text = $"Category: {value.category}";
-                PriceLabel.Text = $"Price: {value.price:C}";
+                NameLabel.Text = value.Name;
+                CategoryLabel.Text = $"Category: {value.Category}";
+                PriceLabel.Text = $"Price: {value.Price:C}";
 
-                if (StatusAssets.ImagePaths.TryGetValue(value.category, out var imageUrl))
+                if (StatusAssets.ImagePaths.TryGetValue(value.Category, out var imageUrl))
                 {
                     CategoryImage.Source = imageUrl;
                 }
