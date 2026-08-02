@@ -16,10 +16,11 @@ namespace PodB_MAUI.Model
     {
         public static readonly Dictionary<GroceryCategory, string> ImagePaths = new()
         {
-            { GroceryCategory.PRODUCE, "https://cdn-icons-png.flaticon.com/512/2909/2909808.png" },
-            { GroceryCategory.DAIRY, "https://cdn-icons-png.flaticon.com/512/2674/2674486.png" },
-            { GroceryCategory.MEAT, "https://cdn-icons-png.flaticon.com/512/1046/1046751.png" },
-            { GroceryCategory.BAKERY, "https://cdn-icons-png.flaticon.com/512/3014/3014520.png" },
+            //TODO: Replace the *** with the actual image file names for each category. Do we want to use pngs or xmls?
+            { GroceryCategory.PRODUCE, "Resources/Images/produce.png" },
+            { GroceryCategory.DAIRY, "Resources/Images/dairy.png" },
+            { GroceryCategory.MEAT, "Resources/Images/meat.png" },
+            { GroceryCategory.BAKERY, "Resources/Images/bakery.png" }
         };
     }
 }
