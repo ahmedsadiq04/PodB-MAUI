@@ -66,11 +66,16 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="13.0.0" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.2" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="10.0.0" />
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="View\AddItem\AddItemScreen.xaml.cs">
+	    <DependentUpon>AddItemScreen.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Resources\strings.Designer.cs">
 	    <DesignTime>True</DesignTime>
 	    <AutoGen>True</AutoGen>
@@ -86,9 +91,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="ItemDetailPage.xaml">
+	  <MauiXaml Update="View\ItemDetail\ItemDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="View\ItemList\" />
 	</ItemGroup>
 
 </Project>
