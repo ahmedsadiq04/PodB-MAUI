@@ -5,6 +5,12 @@
              x:Class="PodB_MAUI.AddItemScreen"
              Title="{x:Static resources:Strings.add_item_page_title}">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+        IconImageSource="close.svg"
+        Command="{Binding CloseCommand}" />
+    </ContentPage.ToolbarItems>
+
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
@@ -20,10 +26,12 @@
     </ContentPage.Resources>
 
     <VerticalStackLayout
-        Margin="10">
+        Margin="10"
+        Spacing="20">
+        
         <Grid
             ColumnDefinitions="Auto,*"
-            RowDefinitions="Auto, Auto, Auto, Auto"
+            RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto"
             ColumnSpacing="10"
             RowSpacing="20">
 
@@ -31,17 +39,17 @@
                 Grid.Column="0"
                 Grid.Row="0"
                 Text="{x:Static resources:Strings.lbl_product_name}"/>
-
             <Entry
                 Grid.Column="1"
                 Grid.Row="0"
-                x:Name="ProductNameEntry" 
+                x:Name="ProductNameEntry"
+                Text="{Binding ProductName}"
                 Placeholder="{x:Static resources:Strings.ph_product_name}"/>
 
             <Label
                 Grid.Column="0"
                 Grid.Row="1"
-                Text="{x:Static resources:Strings.lbl_product_category}" />
+                Text="{x:Static resources:Strings.lbl_product_category}"/>
             <Picker
                 Grid.Column="1"
                 Grid.Row="1"
@@ -53,26 +61,54 @@
             <Label
                 Grid.Column="0"
                 Grid.Row="2"
-                Text="{x:Static resources:Strings.lbl_product_description}" />
-
+                Text="{x:Static resources:Strings.lbl_product_description}"/>
             <Editor
                 Grid.Column="1"
                 Grid.Row="2"
-                x:Name="ProductDescriptionEditor" 
+                x:Name="ProductDescriptionEditor"
+                Text="{Binding ProductDescription}"
                 Placeholder="{x:Static resources:Strings.ph_product_description}"
                 AutoSize="TextChanges"/>
 
             <Label
                 Grid.Column="0"
                 Grid.Row="3"
-                Text="{x:Static resources:Strings.lbl_product_photo_url}"  />
-
-            <Entry
+                Text="{x:Static resources:Strings.lbl_product_quantity}"/>
+            <Picker
                 Grid.Column="1"
                 Grid.Row="3"
-                x:Name="PhotoUrlEntry" 
-                Placeholder="{x:Static resources:Strings.lbl_product_photo_url}"
-                HorizontalOptions="Fill"/>
+                x:Name="ProductQuantityPicker" 
+                ItemsSource="{Binding Quantities}"
+                SelectedItem="{Binding SelectedQuantity}"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="4"
+                Text="{x:Static resources:Strings.lbl_product_price}"/>
+            <Entry
+                Grid.Column="1"
+                Grid.Row="4"
+                x:Name="PriceEntry"
+                Text="{Binding Price}"
+                Placeholder="{x:Static resources:Strings.ph_product_price}"/>
+
+            <Label
+                Grid.Column="0"
+                Grid.Row="5"
+                Text="{x:Static resources:Strings.lbl_product_photo_url}"/>
+            <Entry
+                Grid.Column="1"
+                Grid.Row="5"
+                x:Name="PhotoUrlEntry"
+                Text="{Binding PhotoUrl}"
+                Placeholder="{x:Static resources:Strings.lbl_product_photo_url}"/>
         </Grid>
+        
+        <Button
+            x:Name="SubmitButton"
+            Text="{x:Static resources:Strings.btn_submit}"
+            HorizontalOptions="Fill"
+            Command="{Binding SubmitCommand}"
+            />
     </VerticalStackLayout>
 </ContentPage>

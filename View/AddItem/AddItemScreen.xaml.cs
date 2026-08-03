@@ -1,3 +1,6 @@
+
+using CommunityToolkit.Maui.Alerts;
+using CommunityToolkit.Maui.Core;
 using PodB_MAUI.View.AddItem;
 
 namespace PodB_MAUI
@@ -8,16 +11,6 @@ namespace PodB_MAUI
 		{
             InitializeComponent();
             BindingContext = new AddItemViewModel();
-        }
-
-        private void OnNameChanged(object sender, TextChangedEventArgs e)
-        {
-            
-        }
-
-        private void OnDescriptionChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

@@ -88,6 +88,42 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        internal static string btn_submit {
+            get {
+                return ResourceManager.GetString("btn_submit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product name &quot;{0}&quot; already exists.
+        /// </summary>
+        internal static string err_duplicate_name {
+            get {
+                return ResourceManager.GetString("err_duplicate_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please give the product a name.
+        /// </summary>
+        internal static string err_empty_name {
+            get {
+                return ResourceManager.GetString("err_empty_name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The entered price &quot;{0}&quot; could not be parsed.
+        /// </summary>
+        internal static string err_price_parse {
+            get {
+                return ResourceManager.GetString("err_price_parse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Category:.
         /// </summary>
         internal static string lbl_product_category {
@@ -124,11 +160,20 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Photo Link:.
+        ///   Looks up a localized string similar to Price:.
         /// </summary>
-        internal static string lbl_product_picture {
+        internal static string lbl_product_price {
             get {
-                return ResourceManager.GetString("lbl_product_picture", resourceCulture);
+                return ResourceManager.GetString("lbl_product_price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity Type:.
+        /// </summary>
+        internal static string lbl_product_quantity {
+            get {
+                return ResourceManager.GetString("lbl_product_quantity", resourceCulture);
             }
         }
         
@@ -160,7 +205,7 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Photo URL.
+        ///   Looks up a localized string similar to https://example.png.
         /// </summary>
         internal static string ph_product_photo_url {
             get {
@@ -169,7 +214,7 @@ namespace PodB_MAUI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Price.
+        ///   Looks up a localized string similar to e.g: 2.99.
         /// </summary>
         internal static string ph_product_price {
             get {
@@ -183,6 +228,15 @@ namespace PodB_MAUI.Resources {
         internal static string ph_quantity_type {
             get {
                 return ResourceManager.GetString("ph_quantity_type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;{0}&quot; was successfully added!.
+        /// </summary>
+        internal static string succ_add_item {
+            get {
+                return ResourceManager.GetString("succ_add_item", resourceCulture);
             }
         }
     }
