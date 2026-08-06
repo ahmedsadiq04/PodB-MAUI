@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
+using FFImageLoading.Maui; // Needed for Image Loading
+using FFImageLoading.Config;
 
 namespace PodB_MAUI
 {
@@ -9,6 +11,7 @@ namespace PodB_MAUI
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseFFImageLoading()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

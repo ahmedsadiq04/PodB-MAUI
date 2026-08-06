@@ -1,33 +1,44 @@
-﻿namespace PodB_MAUI
+﻿using PodB_MAUI.Model;
+using System.Diagnostics;
+
+namespace PodB_MAUI
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
+        private List<GroceryItem> Items;
+
+        private void LoadItems()
+        {
+            //TODO: Load from Files, and Fake
+            Items = FakeGroceryItems.DefaultItems.ToList<GroceryItem>();
+        }
 
         public MainPage()
         {
+            LoadItems();
             InitializeComponent();
+
+            //Lets the UI see the item
+            GroceryCollectionView.ItemsSource = Items;
         }
 
-        private void OnCounterClicked(object? sender, EventArgs e)
+        // When Item is Pressed, Open the Details of it
+        private async void OnItemTapped(object sender, TappedEventArgs e)
         {
-            count++;
-
-            if (count == 1)
-                CounterBtn.Text = $"Clicked {count} time";
-            else
-                CounterBtn.Text = $"Clicked {count} times";
-
-            SemanticScreenReader.Announce(CounterBtn.Text);
-        }
-
-        private async void OnTestDetailClicked(object sender, EventArgs e)
-        {
-            var testItem = new PodB_MAUI.Model.GroceryItem("Banana", Model.GroceryCategory.PRODUCE, 9.99, "A single lb of banana", "https://pamsdailydish.com/wp-content/uploads/2015/04/Bunch-Bananas-1.jpg");
-            await Shell.Current.GoToAsync(nameof(ItemDetailPage), new Dictionary<string, object>
+            if (sender is BindableObject bindable && bindable.BindingContext is GroceryItem selectedItem)
             {
-                { "SelectedItem", testItem }
+                await Shell.Current.GoToAsync(nameof(ItemDetailPage), new Dictionary<string, object>
+            {
+                { "SelectedItem", selectedItem }
             });
+            }
+        }
+
+        // The Add Button -> Go to Add Item Scren
+        private async void OnAddItemClicked(object sender, EventArgs e)
+        {
+            // TODO: Go To Add Item Screen
+            await DisplayAlert("Add Item", "Navigate to add item modal/page here.", "OK");
         }
     }
 }
