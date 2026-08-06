@@ -117,22 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="add_item_page_title" xml:space="preserve">
+    <value>Add Item</value>
+  </data>
   <data name="Add_Item_Title" xml:space="preserve">
     <value>Add Item</value>
   </data>
   <data name="App_Title" xml:space="preserve">
     <value>Grocery Store System</value>
   </data>
+  <data name="btn_submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="err_duplicate_name" xml:space="preserve">
+    <value>Product name "{0}" already exists</value>
+  </data>
+  <data name="err_empty_name" xml:space="preserve">
+    <value>Please give the product a name</value>
+  </data>
+  <data name="err_price_parse" xml:space="preserve">
+    <value>The entered price "{0}" could not be parsed</value>
+  </data>
+  <data name="lbl_product_category" xml:space="preserve">
+    <value>Category:</value>
+  </data>
+  <data name="lbl_product_description" xml:space="preserve">
+    <value>Description:</value>
+  </data>
+  <data name="lbl_product_name" xml:space="preserve">
+    <value>Product Name:</value>
+  </data>
+  <data name="lbl_product_photo_url" xml:space="preserve">
+    <value>Photo URL:</value>
+  </data>
+  <data name="lbl_product_price" xml:space="preserve">
+    <value>Price:</value>
+  </data>
+  <data name="lbl_product_quantity" xml:space="preserve">
+    <value>Quantity Type:</value>
+  </data>
   <data name="ph_product_category" xml:space="preserve">
     <value>Category</value>
+  </data>
+  <data name="ph_product_description" xml:space="preserve">
+    <value>Description</value>
   </data>
   <data name="ph_product_name" xml:space="preserve">
     <value>Product name</value>
   </data>
+  <data name="ph_product_photo_url" xml:space="preserve">
+    <value>https://example.png</value>
+  </data>
   <data name="ph_product_price" xml:space="preserve">
-    <value>Price</value>
+    <value>e.g: 2.99</value>
   </data>
   <data name="ph_quantity_type" xml:space="preserve">
     <value>Quantity Type</value>
+  </data>
+  <data name="succ_add_item" xml:space="preserve">
+    <value>"{0}" was successfully added!</value>
   </data>
 </root>

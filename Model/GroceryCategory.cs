@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PodB_MAUI.Model
+﻿namespace PodB_MAUI.Model
 {
     public enum GroceryCategory
     {
