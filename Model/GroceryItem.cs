@@ -5,7 +5,7 @@
         GroceryCategory category,
         double price,
         string description = "No description available",
-        string photoUrl = "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg",
+        string photoUrl = "https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png",
         QuantityType quantityType = QuantityType.UNIT
     );
 }
